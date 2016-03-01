@@ -68,53 +68,24 @@ public class Main {
             //have the customer enter any value they want string or int, letter
             //etc. However we will catch the mistake
             String numInput = scanner.nextLine();
-           // int number;
-           // checkinput(numInput);
-            //was originally going to do while loop but then I
-            //wanted to put in a function
-            /*while (numInput.matches("^[0-9]+$") == false){
-                System.out.println("Your input is not an Integer" +
-                        "Please reenter your values");
-                numInput = scanner.nextLine();
-                if (numInput.matches("^[0-9]+$") == true){
-                    break;
-                }
-            }
-            number = Integer.parseInt(numInput);*/
-           // Pattern patter
-
-            //int number = scanner.nextInt();
-
-           // int number = Integer.parseInt(numInput);
-            //would like to find away to return some of these
-            //items into a method as well. Just to much taking places
-            double price = Double.parseDouble(Coffee[i + 2]);
-            double itemcost = Double.parseDouble(Coffee[i + 1]);
-            double itemcost2 = Math.round(itemcost * 100.0) / 100.0;
-            // CostDrink += itemcost2;
-            double GrossProfit = checkinput(numInput) * price;
-            double Grossprofit2 = Math.round(GrossProfit * 100.0) / 100.0;
-            double costitemtotal = itemcost2 * checkinput(numInput);
-            double cost2 = Math.round(costitemtotal * 100.0) / 100.0;
-            double netprofit = GrossProfit - costitemtotal;
-            double net2 = Math.round(netprofit * 100.0) / 100.0;
-            System.out.println(Coffee[i] + " cups sold is: " + checkinput(numInput) + " cost $" +
-                    itemcost2 + " price per cup $" + Coffee[i + 2] + " gross: $" + Grossprofit2 + " cost item total: "
-                    + cost2 +
-                    "$" + " net profit $" + net2);
-            reports.write("Sold :" + checkinput(numInput) + " Expenses $" + cost2 + " Revenues $" + Grossprofit2 + " Profits $" +
-            net2 + "\n");
-            Sales += Grossprofit2;
-            CostDrink += cost2;
-            CostDrink2 = Math.round(CostDrink * 100.0)/100.0;
-            profits += net2;
+            double expense = Expenses(checkinput(numInput), Coffee[i+1]);
+            double revs  = Revenues(checkinput(numInput), Coffee[i+2]);
+            System.out.println(Coffee[i] + " cups sold is: " + checkinput(numInput) + " cost per cup, $" +
+                    Coffee[i+1] + " price per cup $" + Coffee[i + 2] + " gross: $" + revs + " cost item total: "
+                    + expense + "$" + " net profit $" + Profits(expense, revs));
+            reports.write("Sold :" + checkinput(numInput) + " Expenses $" + expense + " Revenues $" + revs + " Profits $" +
+            Profits(expense, revs) + "\n");
+            Sales += revs;
+            CostDrink += expense;
+           // CostDrink2 = Math.round(CostDrink * 100.0)/100.0;
+            profits += Profits(expense, revs);
             count += checkinput(numInput);
 
         }
         System.out.println("total cups " + count + ", total sales $" + Sales +
                 " total costs $" + CostDrink2 + " profits $" + profits);
 
-            reports.write(count + " cups sold, total expensense $" + CostDrink2 + " total Revenues $" + Sales +
+            reports.write(count + " cups sold, total expensense $" + CostDrink + " total Revenues $" + Sales +
             "Profits $" + profits + "\n");
             reports.close();
         }
@@ -132,6 +103,24 @@ public class Main {
 
         }
         }
+    public static double Expenses(int num, String costit){
+        double itemcost = Double.parseDouble(costit);
+        double totaldrinkcost = num * itemcost;
+        double totaldrinkcostround = Math.round(totaldrinkcost * 100.0)/100.0;
+        return totaldrinkcostround;
+    }
+    public static double Revenues(int num, String sales){
+        double saleprice = Double.parseDouble(sales);
+        double salesfordrink = num * saleprice;
+        double salesfordrinkround = Math.round(salesfordrink * 100.0)/100.0;
+        return salesfordrinkround;
+    }
+    public static double Profits (double revnues, double sales){
+        double profits = revnues * sales;
+        double profitsround = Math.round(profits * 100.0)/100.0;
+        return profitsround;
+
+    }
     public static int checkinput(String inputs){
         int nums;
         Scanner scanner2 = new Scanner(System.in);
