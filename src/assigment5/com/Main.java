@@ -15,7 +15,7 @@ public class Main {
 	// write your code here
         try {
             //we need a scanner to look for new new variables
-        Scanner scanner = new Scanner(System.in);
+        //Scanner scanner = new Scanner(System.in);
             //read the text with a buffer reader
         BufferedReader bufreader = new BufferedReader(new FileReader("coffee (2).txt"));
             //read the file report into the sales-reports.txt files
@@ -46,7 +46,7 @@ public class Main {
        //close the bufreader.
         bufreader.close();
             // print our list string so we know what the list should look like
-        System.out.println(listString);
+       // System.out.println(listString);
        // List<String> Coffee2 = new ArrayList<String>()
             //create a String Array
         String Coffee [] = listString.split(",");
@@ -54,10 +54,8 @@ public class Main {
         //String names = "";
             // these are for the grand totals at the end for total store sales
         double CostDrink = 0.0;
-            double CostDrink2 = 0.0;
         double Sales = 0.0;
         double profits = 0.0;
-            double profits2 = 0.0;
         int count = 0;
             //we need to set the Coffee.lengt - 1 else an ArrayIndexoutBoundsException
             //will be thrown
@@ -67,6 +65,8 @@ public class Main {
             System.out.println("How many cups of " + Coffee[i] + " were sold today?");
             //have the customer enter any value they want string or int, letter
             //etc. However we will catch the mistake
+            Scanner scanner = new Scanner(System.in);
+
             String numInput = scanner.nextLine();
             double expense = Expenses(checkinput(numInput), Coffee[i+1]);
             double revs  = Revenues(checkinput(numInput), Coffee[i+2]);
@@ -74,19 +74,16 @@ public class Main {
                     Coffee[i+1] + " price per cup $" + Coffee[i + 2] + " gross: $" + revs + " cost item total: "
                     + expense + "$" + " net profit $" + Profits(expense, revs));
             reports.write("Sold :" + checkinput(numInput) + " Expenses $" + expense + " Revenues $" + revs + " Profits $" +
-            Profits(expense, revs) + "\n");
+            Profits(expense,revs) + "\n");
             Sales += revs;
             CostDrink += expense;
-           // CostDrink2 = Math.round(CostDrink * 100.0)/100.0;
             profits += Profits(expense, revs);
             count += checkinput(numInput);
-
         }
-        System.out.println("total cups " + count + ", total sales $" + Sales +
-                " total costs $" + CostDrink2 + " profits $" + profits);
-
-            reports.write(count + " cups sold, total expensense $" + CostDrink + " total Revenues $" + Sales +
-            "Profits $" + profits + "\n");
+        System.out.println("total cups " + count + ", total sales $" + roundfinals(Sales) +
+                " total costs $" + roundfinals(CostDrink) + " profits $" + roundfinals(profits));
+            reports.write(count + " cups sold, total expensense $" + roundfinals(CostDrink) + " total Revenues $" + roundfinals(Sales) +
+            "Profits $" + roundfinals(profits) + "\n");
             reports.close();
         }
         catch (IOException ae){
@@ -99,44 +96,53 @@ public class Main {
         }
         catch (ArrayIndexOutOfBoundsException e){
             System.out.println("there is nothing left");
-
-
         }
         }
+    //rounds all final input for final sales into sensible values that are not .666666655 etc
+    //and only rounding it once not each time
+    public static double roundfinals(double z){
+        double moneyvalue = Math.round(z * 100.0)/100.0;
+        return moneyvalue;
+    }
+    //code to calculate expenses for each drink
     public static double Expenses(int num, String costit){
         double itemcost = Double.parseDouble(costit);
         double totaldrinkcost = num * itemcost;
         double totaldrinkcostround = Math.round(totaldrinkcost * 100.0)/100.0;
         return totaldrinkcostround;
     }
+    //The revenues method for each product
     public static double Revenues(int num, String sales){
         double saleprice = Double.parseDouble(sales);
         double salesfordrink = num * saleprice;
         double salesfordrinkround = Math.round(salesfordrink * 100.0)/100.0;
         return salesfordrinkround;
     }
+    //Profits for each item
     public static double Profits (double revnues, double sales){
-        double profits = revnues * sales;
+        double profits = sales - revnues;
         double profitsround = Math.round(profits * 100.0)/100.0;
         return profitsround;
 
     }
-    public static int checkinput(String inputs){
+    public static int checkinput(String inputs) {
         int nums;
         Scanner scanner2 = new Scanner(System.in);
         //tring inputs2 = inputs;
-        while(inputs.matches("^[0-9]+$") == false){
+        while (inputs.matches("^[0-9]+$") == false) {
             //enter another value to continue
-           /* System.out.println("you enter a value that is not correct" +
-                    " please reenter");
-             inputs = scanner2.nextLine(); */
-            if (inputs.matches("[0-9]") == true){
-                break;
-            }
+            String inputs2;
             System.out.println("you enter a value that is not correct" +
                     " please reenter");
-            inputs = scanner2.nextLine();
+             inputs2 = scanner2.nextLine();
+            if (inputs2.matches("^[0-9]+$") == true){
+                inputs = inputs2;
+            break;
         }
+        //System.out.println("you enter a value that is not correct" +
+          //      " please reenter");
+       // inputs = scanner2.nextLine();
+    }
         nums = Integer.parseInt(inputs);
         return nums;
     }
