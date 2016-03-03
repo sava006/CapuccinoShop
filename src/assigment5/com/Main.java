@@ -13,6 +13,7 @@ public class Main {
 
     public static void main(String[] args) {
 	// write your code here
+        System.out.println();
         try {
             //we need a scanner to look for new new variables
         //Scanner scanner = new Scanner(System.in);
