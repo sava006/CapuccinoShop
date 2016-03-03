@@ -1,0 +1,12 @@
+Sold :4 Expenses $3.8 Revenues $6.0 Profits $2.2
+Sold :4 Expenses $6.68 Revenues $15.0 Profits $8.32
+Sold :4 Expenses $1.4 Revenues $7.16 Profits $5.76
+Sold :4 Expenses $1.4 Revenues $8.36 Profits $6.96
+Sold :4 Expenses $5.8 Revenues $11.0 Profits $5.2
+Sold :4 Expenses $2.8 Revenues $10.6 Profits $7.8
+Sold :4 Expenses $2.0 Revenues $10.0 Profits $8.0
+Sold :4 Expenses $2.6 Revenues $9.0 Profits $6.4
+Sold :5 Expenses $1.25 Revenues $8.25 Profits $7.0
+Sold :6 Expenses $7.38 Revenues $21.0 Profits $13.62
+Sold :7 Expenses $10.15 Revenues $25.9 Profits $15.75
+50 cups sold, total expensense $45.26 total Revenues $132.27Profits $87.01

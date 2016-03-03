@@ -69,12 +69,13 @@ public class Main {
             Scanner scanner = new Scanner(System.in);
 
             String numInput = scanner.nextLine();
-            double expense = Expenses(checkinput(numInput), Coffee[i+1]);
-            double revs  = Revenues(checkinput(numInput), Coffee[i+2]);
-            System.out.println(Coffee[i] + " cups sold is: " + checkinput(numInput) + " cost per cup, $" +
+            int check = checkinput(numInput);
+            double expense = Expenses(check, Coffee[i+1]);
+            double revs  = Revenues(check, Coffee[i+2]);
+            System.out.println(Coffee[i] + " cups sold is: " + check + " cost per cup, $" +
                     Coffee[i+1] + " price per cup $" + Coffee[i + 2] + " gross: $" + revs + " cost item total: "
                     + expense + "$" + " net profit $" + Profits(expense, revs));
-            reports.write("Sold :" + checkinput(numInput) + " Expenses $" + expense + " Revenues $" + revs + " Profits $" +
+            reports.write("Sold :" + check + " Expenses $" + expense + " Revenues $" + revs + " Profits $" +
             Profits(expense,revs) + "\n");
             Sales += revs;
             CostDrink += expense;
